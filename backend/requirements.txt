@@ -14,7 +14,5 @@ Flask-Cors==3.0.10
 marshmallow_enum==1.5.1
 requests==2.27.1
 python-dotenv==0.19.2
-pandas==1.1.5
-openpyxl==3.0.9
 markupsafe==2.0.1
 itsdangerous==2.0.1
