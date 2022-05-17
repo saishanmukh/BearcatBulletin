@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-app-registration',
@@ -12,7 +13,8 @@ export class AppRegistrationComponent implements OnInit {
   @ViewChild("container")
   container!: ElementRef;
   
-  form!: FormGroup;
+  signupform!: FormGroup;
+  signinform!: FormGroup;
   loading = false;
   submitted = false;
 
@@ -20,25 +22,33 @@ export class AppRegistrationComponent implements OnInit {
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
+      private http: HttpClient
   ) { }
 
   ngOnInit() {
-      this.form = this.formBuilder.group({
-        firstName: ['', Validators.required],
-          lastname: ['', Validators.required],
-          dob: ['', Validators.required],
-          email: ['', Validators.required],
-          password: ['', [Validators.required, Validators.minLength(6)]],
-          confirmpassword: ['', [Validators.required, Validators.minLength(6)]]
-      });
+      this.signupform = this.formBuilder.group({
+        firstName: this.formBuilder.control('', Validators.required),
+        lastname: this.formBuilder.control('', Validators.required),
+        dob: this.formBuilder.control('', Validators.required),
+        email: this.formBuilder.control('', Validators.required),
+        password: this.formBuilder.control('', [Validators.required, Validators.minLength(6)]),
+        confirmpassword: this.formBuilder.control('',  [Validators.required, Validators.minLength(6)]),
+    });
+    this.signinform = this.formBuilder.group({
+        email: this.formBuilder.control('', Validators.required),
+        password: this.formBuilder.control('', [Validators.required, Validators.minLength(6)]),
+    })
   }
 
   signup(){
-    console.log(this.form);
+    this.http.post<any>('https://reqres.in/api/posts', { data: this.signupform.value }).subscribe(data => {
+      console.log(data)
+    })
+    console.log(this.signupform.value);
   }
 
   signupchange(){
-    console.log(this.form);
+    console.log(this.signupform);
     // //const container = document.getElementById('container');
     this.container.nativeElement.classList.add('right-panel-active');
   }

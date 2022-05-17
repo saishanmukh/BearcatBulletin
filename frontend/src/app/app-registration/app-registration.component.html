@@ -3,7 +3,7 @@
 
     <div class="form-container sign-up-container">
 
-        <div [formGroup]="form" (ngSubmit)="signup()">
+        <form [formGroup]="signupform" (ngSubmit)="signup()">
             <h1>Create Account</h1>
             <input type="text" formControlName="firstName" placeholder="Enter your First Name">
             <input type="text" formControlName="lastname" placeholder="Enter your Last Name">
@@ -12,10 +12,10 @@
             <input type="password" formControlName="password" placeholder="Enter your password">
             <input type="password" formControlName="confirmpassword" placeholder="Confirm password">
             <button>SignUp</button>
-        </div>
+        </form>
     </div>
     <div class="form-container sign-in-container">
-        <form action="#">
+        <form [formGroup]="signinform" (ngSubmit)="signup()">
             <h1>Sign In</h1>
             <input type="email" formControlName="email" placeholder="Email">
             <input type="password" formControlName="password" placeholder="Password">
