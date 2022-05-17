@@ -17,24 +17,24 @@ backend/bearcat_bulletin_env
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
-/frontent/dist
-/frontent/tmp
-/frontent/out-tsc
-/frontent/bazel-out
+frontent/dist
+frontent/tmp
+frontent/out-tsc
+frontent/bazel-out
 
 # Node
-/frontent/node_modules
-/frontent/npm-debug.log
-/frontent/yarn-error.log
+frontent/node_modules
+frontent/npm-debug.log
+frontent/yarn-error.log
 
 # IDEs and editors
-/frontent/.idea/
-/frontent/.project
-/frontent/.classpath
-/frontent/.c9/
-/frontent/*.launch
-/frontent/.settings
-/frontent/*.sublime-workspace
+frontent/.idea/
+frontent/.project
+frontent/.classpath
+frontent/.c9/
+frontent/*.launch
+frontent/.settings
+frontent/*.sublime-workspace
 
 # Visual Studio Code
 .vscode/*
@@ -45,14 +45,16 @@ backend/bearcat_bulletin_env
 .history/*
 
 # Miscellaneous
-/frontent/.angular/cache
-/frontent/.sass-cache/
-/frontent/connect.lock
-/frontent/coverage
-/frontent/libpeerconnection.log
-/frontent/testem.log
-/frontent/typings
+frontent/.angular/cache
+frontent/.sass-cache/
+frontent/connect.lock
+frontent/coverage
+frontent/libpeerconnection.log
+frontent/testem.log
+frontent/typings
 
 # System files
-/frontent/.DS_Store
-/frontent/Thumbs.db
+frontent/.DS_Store
+frontent/Thumbs.db
+frontend/node_modules
+frontend/.angular/cache
