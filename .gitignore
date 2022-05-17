@@ -1,0 +1,15 @@
+*.pyc
+__pycache__/
+
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+venv/
+dist/
+build/
+*.egg-info/
+.env
+backend/bearcat_bulletin_env
