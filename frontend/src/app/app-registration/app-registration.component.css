@@ -2,7 +2,7 @@
 
 * {
     box-sizing: border-box;
-    
+    /* background-image: url(../../assets/images/northwestmissouri.jpg); */
 }
 
 body {
@@ -47,8 +47,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #006747;
+	background-color: #006747;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -164,9 +164,9 @@ input {
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background: #1cd89d;
+	background: -webkit-linear-gradient(to right, #1cd89d, #006747);
+	background: linear-gradient(to right, #1cd89d, #006747);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;

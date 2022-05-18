@@ -27,12 +27,12 @@ export class AppRegistrationComponent implements OnInit {
 
   ngOnInit() {
       this.signupform = this.formBuilder.group({
-        firstName: this.formBuilder.control('', Validators.required),
-        lastname: this.formBuilder.control('', Validators.required),
-        dob: this.formBuilder.control('', Validators.required),
+        first_name: this.formBuilder.control('', Validators.required),
+        last_name: this.formBuilder.control('', Validators.required),
+        // dob: this.formBuilder.control('', Validators.required),
         email: this.formBuilder.control('', Validators.required),
         password: this.formBuilder.control('', [Validators.required, Validators.minLength(6)]),
-        confirmpassword: this.formBuilder.control('',  [Validators.required, Validators.minLength(6)]),
+        role: this.formBuilder.control('',  [Validators.required, Validators.minLength(6)]),
     });
     this.signinform = this.formBuilder.group({
         email: this.formBuilder.control('', Validators.required),
@@ -41,20 +41,26 @@ export class AppRegistrationComponent implements OnInit {
   }
 
   signup(){
-    this.http.post<any>('https://reqres.in/api/posts', { data: this.signupform.value }).subscribe(data => {
-      console.log(data)
+    console.log(JSON.stringify(this.signupform.value))
+    const headers = { 'Content-Type': 'application/json' };
+    this.http.post<any>("http://127.0.0.1:5000/api/users", JSON.stringify(this.signupform.value),{ headers }).subscribe(data => {
+      this.signinchange()
     })
     console.log(this.signupform.value);
   }
 
+  signin(){
+    const headers = { 'Content-Type': 'application/json' };
+    this.http.post<any>("http://127.0.0.1:5000/api/users/login", JSON.stringify(this.signinform.value),{ headers }).subscribe(data => {
+      alert("Succesfully login")
+    })
+  }
+
   signupchange(){
-    console.log(this.signupform);
-    // //const container = document.getElementById('container');
     this.container.nativeElement.classList.add('right-panel-active');
   }
 
   signinchange(){
-    // const container = document.getElementById('container');
     this.container.nativeElement.classList.remove('right-panel-active');
   }
 
