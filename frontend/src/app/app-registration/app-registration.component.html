@@ -1,42 +1,41 @@
-<div class="container" #container id="container" >
-   
+<div class="body">
+    <div class="container" #container id="container">
+        <div class="form-container sign-up-container">
 
-    <div class="form-container sign-up-container">
+            <form [formGroup]="signupform" (ngSubmit)="signup()">
+                <h1>Create Account</h1>
+                <input type="text" formControlName="first_name" placeholder="Enter your First Name">
+                <input type="text" formControlName="last_name" placeholder="Enter your Last Name">
+                <!-- <input type="text" formControlName="dob" placeholder="Enter your Date of Birth"> -->
+                <input type="text" formControlName="role" placeholder="Enter your role">
+                <input type="email" formControlName="email" placeholder="Enter your Email ID">
+                <input type="password" formControlName="password" placeholder="Enter your password">
+                <button>SignUp</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form [formGroup]="signinform" (ngSubmit)="signin()">
+                <h1>Sign In</h1>
+                <input type="email" formControlName="email" placeholder="Email">
+                <input type="password" formControlName="password" placeholder="Password">
+                <a href="#">Forgot Your Password</a>
 
-        <form [formGroup]="signupform" (ngSubmit)="signup()">
-            <h1>Create Account</h1>
-            <input type="text" formControlName="firstName" placeholder="Enter your First Name">
-            <input type="text" formControlName="lastname" placeholder="Enter your Last Name">
-            <input type="text" formControlName="dob" placeholder="Enter your Date of Birth">
-            <input type="email" formControlName="email" placeholder="Enter your Email ID">
-            <input type="password" formControlName="password" placeholder="Enter your password">
-            <input type="password" formControlName="confirmpassword" placeholder="Confirm password">
-            <button>SignUp</button>
-        </form>
-    </div>
-    <div class="form-container sign-in-container">
-        <form [formGroup]="signinform" (ngSubmit)="signup()">
-            <h1>Sign In</h1>
-            <input type="email" formControlName="email" placeholder="Email">
-            <input type="password" formControlName="password" placeholder="Password">
-            <a href="#">Forgot Your Password</a>
-
-            <button>Sign In</button>
-        </form>
-    </div>
-    <div class="overlay-container">
-        <div class="overlay">
-            <div class="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your personal info</p>
-                <button class="ghost" id="signIn" (click) ="signinchange()">Sign In</button>
-            </div>
-            <div class="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your details and start journey with us</p>
-                <button class="ghost" id="signUp" (click) ="signupchange()">Sign Up</button>
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="ghost" id="signIn" (click)="signinchange()">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Bearcat!</h1>
+                    <p>Enter your details and start journey with us</p>
+                    <button class="ghost" id="signUp" (click)="signupchange()">Sign Up</button>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
