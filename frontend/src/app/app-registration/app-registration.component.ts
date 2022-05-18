@@ -44,8 +44,14 @@ export class AppRegistrationComponent implements OnInit {
     console.log(JSON.stringify(this.signupform.value))
     const headers = { 'Content-Type': 'application/json' };
     this.http.post<any>("http://127.0.0.1:5000/api/users", JSON.stringify(this.signupform.value),{ headers }).subscribe(data => {
-      this.signinchange()
-    })
+    this.signupform.reset() 
+    this.signinchange()
+
+    },
+    error => {alert("This Account is already registerd")
+    this.signupform.reset() 
+  }
+    )
     console.log(this.signupform.value);
   }
 
@@ -53,7 +59,10 @@ export class AppRegistrationComponent implements OnInit {
     const headers = { 'Content-Type': 'application/json' };
     this.http.post<any>("http://127.0.0.1:5000/api/users/login", JSON.stringify(this.signinform.value),{ headers }).subscribe(data => {
       alert("Succesfully login")
-    })
+    },
+    error =>{ alert("Incorrect Credentials"),
+    this.signinform.reset() }
+    )
   }
 
   signupchange(){
