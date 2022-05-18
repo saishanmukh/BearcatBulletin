@@ -8,7 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { AdminLayoutComponent } from '../app/admin-layout/admin-layout.component';
-
+import { FooterModule } from './shared/footer/footer.module';
+import { NavbarModule } from './shared/navbar/navbar.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,8 @@ import { AdminLayoutComponent } from '../app/admin-layout/admin-layout.component
     ReactiveFormsModule,
     HttpClientModule,
     SidebarModule,
+    FooterModule,
+    NavbarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
