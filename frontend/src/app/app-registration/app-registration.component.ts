@@ -32,7 +32,7 @@ export class AppRegistrationComponent implements OnInit {
         // dob: this.formBuilder.control('', Validators.required),
         email: this.formBuilder.control('', Validators.required),
         password: this.formBuilder.control('', [Validators.required, Validators.minLength(6)]),
-        role: this.formBuilder.control('',  [Validators.required, Validators.minLength(6)]),
+        role: this.formBuilder.control('USER',  [Validators.required, Validators.minLength(6)]),
     });
     this.signinform = this.formBuilder.group({
         email: this.formBuilder.control('', Validators.required),
