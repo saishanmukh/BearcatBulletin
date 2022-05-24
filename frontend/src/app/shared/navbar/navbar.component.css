@@ -8,4 +8,6 @@
     position: sticky;
     top: 0px;
 }
-
+.posticon:hover {
+    background: gray;
+}
