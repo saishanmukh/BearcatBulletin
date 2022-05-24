@@ -70,3 +70,6 @@
     transition: 0.5s;
 }
 
+.posticon:hover {
+    background: gray;
+}

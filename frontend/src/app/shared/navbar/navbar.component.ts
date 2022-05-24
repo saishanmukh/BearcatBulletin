@@ -10,6 +10,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 })
 
 export class NavbarComponent implements OnInit{
+    displayPostModal = "none";
     private listTitles!: any[];
     location: Location;
     private toggleButton: any;
@@ -69,4 +70,12 @@ export class NavbarComponent implements OnInit{
         const toggleMenu = document.querySelector('.menu');
         toggleMenu?.classList.toggle('change')
     }
+    openPopup() {
+    this.displayPostModal = "block";
+    }
+    post() {
+    }
+    close() {
+        this.displayPostModal = "none";
+        }
 }
