@@ -10,12 +10,15 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { AdminLayoutComponent } from '../app/admin-layout/admin-layout.component';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
+import { CategoryComponent } from './category/category.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppRegistrationComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    CategoryComponent
   ],
   exports: [AppRegistrationComponent],
   imports: [
@@ -26,7 +29,8 @@ import { NavbarModule } from './shared/navbar/navbar.module';
     HttpClientModule,
     SidebarModule,
     FooterModule,
-    NavbarModule
+    NavbarModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
