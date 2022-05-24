@@ -4,4 +4,8 @@
 .navbar-brand{
     color: white;
 }
+.navbar-sticky {
+    position: sticky;
+    top: 0px;
+}
 

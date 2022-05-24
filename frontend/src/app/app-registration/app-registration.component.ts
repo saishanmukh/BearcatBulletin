@@ -32,7 +32,7 @@ export class AppRegistrationComponent implements OnInit {
         // dob: this.formBuilder.control('', Validators.required),
         email: this.formBuilder.control('', Validators.required),
         password: this.formBuilder.control('', [Validators.required, Validators.minLength(6)]),
-        role: this.formBuilder.control('',  [Validators.required, Validators.minLength(6)]),
+        role: this.formBuilder.control('USER',  [Validators.required, Validators.minLength(6)]),
     });
     this.signinform = this.formBuilder.group({
         email: this.formBuilder.control('', Validators.required),
@@ -58,7 +58,8 @@ export class AppRegistrationComponent implements OnInit {
   signin(){
     const headers = { 'Content-Type': 'application/json' };
     this.http.post<any>("http://127.0.0.1:5000/api/users/login", JSON.stringify(this.signinform.value),{ headers }).subscribe(data => {
-      alert("Succesfully login")
+     // alert("Succesfully login")
+      this.router.navigate(['/trending']); 
     },
     error =>{ alert("Incorrect Credentials"),
     this.signinform.reset() }

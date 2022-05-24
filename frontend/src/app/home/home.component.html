@@ -1,22 +1,23 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row">
+        <div *ngFor = "let card of mockData">
+          <div class="row">
             <div class="card" style="max-width: 830px;">
                 <img
-                  src="https://mdbootstrap.com/img/new/slides/017.webp"
+                  src= {{card.imageURL}}
                   class="card-img"
                   alt="..."
                   style="max-width: 830px;"
                 />
                 <div class="card-img-overlay">
-                  <h5 class="card-title">Card title</h5>
+                  <h5 class="card-title"> {{card.headline}} </h5>
                   <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to additional
-                    content. This content is a little bit longer.
+                   {{card.description}}
                   </p>
-                  <p class="card-text">Last updated 3 mins ago</p>
+                  <p class="card-text">{{card.updatedby}}</p>
                 </div>
               </div>
+        </div>
         </div>
     </div>
 </div>

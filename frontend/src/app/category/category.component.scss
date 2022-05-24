@@ -1,0 +1,31 @@
+.main-content {
+    background-color: white !important;
+}
+
+.category{
+  max-height: 90px;
+  border: 1px solid white;
+  display: flex;
+  overflow-x: auto ;
+}
+
+.category::-webkit-scrollbar{
+  width: 0;
+}
+
+.category .item{
+  min-width: 130px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #1a8361;
+  margin-right: 30px ;
+  border-radius: 20px;
+  color: white;
+}
+
+.category .item:hover{
+  background-color: #025138;
+}
+  
+  
