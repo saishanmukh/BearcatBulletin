@@ -64,4 +64,9 @@ export class NavbarComponent implements OnInit{
       }
       return 'Dashboard';
     }
+
+    menuToggle(){
+        const toggleMenu = document.querySelector('.menu');
+        toggleMenu?.classList.toggle('change')
+    }
 }
