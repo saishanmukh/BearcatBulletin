@@ -12,13 +12,15 @@ import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { CategoryComponent } from './category/category.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppRegistrationComponent,
     AdminLayoutComponent,
-    CategoryComponent
+    CategoryComponent,
+    UserProfileComponent
   ],
   exports: [AppRegistrationComponent],
   imports: [
