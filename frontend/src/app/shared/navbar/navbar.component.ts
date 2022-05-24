@@ -10,6 +10,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 })
 
 export class NavbarComponent implements OnInit{
+    displayPostModal = "none";
     private listTitles!: any[];
     location: Location;
     private toggleButton: any;
@@ -64,4 +65,13 @@ export class NavbarComponent implements OnInit{
       }
       return 'Dashboard';
     }
+
+    openPopup() {
+    this.displayPostModal = "block";
+    }
+    post() {
+    }
+    close() {
+        this.displayPostModal = "none";
+        }
 }
