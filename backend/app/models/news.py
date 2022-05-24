@@ -8,20 +8,26 @@ class News(db.Model):
     description = db.Column(db.String(80), nullable=False)
     category = db.Column(db.String(80), nullable=False)
     hashtag = db.Column(db.String(80), nullable=True)
-    posted_by = db.Column(db.String(80), nullable=False)
+    posted_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     channel = db.Column(db.String(120), nullable=True)
-    start_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
-    end_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+    posted_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+    edited_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
 
-    def __init__(self, headline, description, category, hashtag, posted_by, channel, start_date, end_date):
+    # create a relation with user_news table
+    user_news = db.relationship('UserNews', backref='news', lazy=True)
+
+    # create a relation with images table
+    images = db.relationship('Images', backref='news', lazy=True)
+
+    def __init__(self, headline, description, category, hashtag, posted_by, channel, posted_date, edited_date):
         self.headline = headline
         self.description = description
         self.category = category
         self.hashtag = hashtag
         self.posted_by = posted_by
         self.channel = channel
-        self.start_date = start_date
-        self.end_date = end_date
+        self.posted_date = posted_date
+        self.edited_date = edited_date
 
     def __repr__(self) -> str:
         return f'<News id={self.news_id}>'
@@ -35,6 +41,6 @@ class News(db.Model):
             'hashtag': self.hashtag,
             'posted_by': self.posted_by,
             'channel': self.channel,
-            'start_date': self.start_date,
-            'end_date': self.end_date
-        }      
+            'posted_date': self.posted_date,
+            'edited_date': self.edited_date
+        }

@@ -5,7 +5,7 @@ class Images(db.Model):
     __table__name = 'images'
 
     image_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    news_id = db.Column(db.Integer, nullable=False, foriegn_key=True)
+    news_id = db.Column(db.Integer, db.ForeignKey('news.news_id'), nullable=False)
     url = db.Column(db.String(80), nullable=False)
 
     def __init__(self, news_id, url):

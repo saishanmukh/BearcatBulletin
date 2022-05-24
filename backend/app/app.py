@@ -24,7 +24,7 @@ load_dotenv()
 
 
 def create_app(config_class=DevelopmentConfig):
-    from app.models import user
+    from app.models import user, news, birthday, images, polling, userNews
     app = Flask(__name__)
     
     # Configure the app from config file

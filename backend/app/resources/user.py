@@ -74,7 +74,6 @@ def update_by_id(id, args):
 def login(args):
     """Login an user"""
     user = User.find_by_email(args['email'])
-    print(user)
     if user:
         if user.check_password(args['password']):
             return user

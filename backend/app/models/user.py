@@ -17,13 +17,19 @@ class User(db.Model):
     created_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
     password = db.Column(db.String(80), nullable=False)
 
+    # create relation with news
+    news = db.relationship('News', backref='user', lazy=True)
+
+    # create relation with user_news
+    user_news = db.relationship('UserNews', backref='user', lazy=True)
+
     def __init__(self, first_name, last_name, email, password, role):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.password = password
         self.role = role
- 
+
     
     def __repr__(self) -> str:
         return f'<User id={self.id} email={self.email} >'
