@@ -19,6 +19,12 @@ class News(db.Model):
     # create a relation with images table
     images = db.relationship('Images', backref='news', lazy=True)
 
+    # create a relation with channel table
+    channel = db.relationship('Channel', backref='news', lazy=True)
+
+    # create a relation with telecastednews table
+    telecasted_news = db.relationship('TelecastedNews', backref='news', lazy=True)
+
     def __init__(self, headline, description, category, hashtag, posted_by, channel, posted_date, edited_date):
         self.headline = headline
         self.description = description
