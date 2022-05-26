@@ -47,11 +47,13 @@ def create_app(config_class=DevelopmentConfig):
 
     # register blueprints
     from app.resources.user import users
+    from app.resources.news import news
 
 
 
 
     app.register_blueprint(users, url_prefix='/api')
+    app.register_blueprint(news, url_prefix='/api')
 
     
     @app.errorhandler(Exception)

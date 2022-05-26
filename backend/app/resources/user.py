@@ -1,5 +1,4 @@
 from flask import Blueprint, abort, jsonify, Response
-import requests
 from apifairy import body, response, other_responses, arguments
 
 from app.models.user import User

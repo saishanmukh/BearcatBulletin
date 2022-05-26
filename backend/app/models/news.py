@@ -1,4 +1,6 @@
 from app.db import db
+from .images import Images
+from sqlalchemy import desc
 
 class News(db.Model):
     __table__name = 'news'
@@ -29,8 +31,32 @@ class News(db.Model):
         self.posted_date = posted_date
         self.edited_date = edited_date
 
-    def __repr__(self) -> str:
-        return f'<News id={self.news_id}>'
+    @classmethod
+    def find_by_id(cls, news_id: int) -> 'News':
+        return cls.query.filter_by(news_id=news_id).first()
+
+    @classmethod
+    def find_all(cls) -> 'News':
+        return cls.query.all()
+
+    @classmethod
+    def find_all_news(cls):
+        # join news and images
+        news = cls.query.join(Images, News.news_id == Images.news_id).order_by(desc(News.posted_date)).all()
+        print(news[0].images)
+        return news
+            
+    
+    def save_to_db(self) -> None:
+        db.session.add(self)
+        db.session.commit()
+
+    def delete_from_db(self) -> None:
+        db.session.delete(self)
+        db.session.commit()
+
+    # def __repr__(self) -> str:
+    #     return f'<News id={self.news_id}>'
 
     def json(self) -> dict:
         return {
