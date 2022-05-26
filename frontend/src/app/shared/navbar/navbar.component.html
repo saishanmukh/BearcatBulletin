@@ -7,16 +7,55 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" >{{getTitle()}}</a>
+            <p class="navbar-brand">{{getTitle()}}</p>
         </div>
         <div class="collapse navbar-collapse" data-color="green">
+
             <ul class="nav navbar-nav navbar-right" style="color: white">
                 <li>
-                    <a style="margin: 0px">
-                        <img src="/assets/images/profile.png" style="height: 40px"/>
+                    <a (click)="openPopup()"
+                        style="margin-top: 12px; margin-bottom: 0px;">
+                        <i class="fa fa-plus-square-o" aria-hidden="true" style="font-size: 32px"></i>
                     </a>
                 </li>
+                <li>
+                    <a style="margin: 0px" (click)="menuToggle()">
+                        <img src="/assets/images/profile.png" style="height: 40px" />
+                    </a>
+                    <div class="menu">
+                        <h3>pavan</h3>
+                        <ul>
+                            <li><img src="/assets/images/user.png">My profile</li>
+                            <li><img src="/assets/images/edit.png">Edit profile</li>
+                            <li><img src="/assets/images/logout.png">Logout</li>
+                        </ul>
+                    </div>
+
+
+
+                </li>
+
             </ul>
         </div>
     </div>
 </nav>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayPostModal}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
+                <h4 class="modal-title">New Post</h4>
+            </div>
+            <div class="modal-body">
+                <p>One Stop Solution for all CS problems</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="post()">
+                    Post
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

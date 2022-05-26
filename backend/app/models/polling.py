@@ -9,6 +9,12 @@ class Polling(db.Model):
     end_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
     category = db.Column(db.String(120), nullable=False)
 
+    # create relation with user
+    user = db.relationship('User', backref='polling', lazy=True)
+
+    # create relation with results
+    results = db.relationship('Results', backref='polling', lazy=True)
+
     def __init__(self, name, start_date, end_date, category):
         self.name = name
         self.start_date = start_date
