@@ -2,9 +2,6 @@ from app.db import db
 from sqlalchemy import Enum
 import enum
 
-from backend.app.models.channel import Channel
-from backend.app.models.channelsubscribers import ChannelSubscribers
-
 class RolesEnum(enum.Enum):
     USER = "USER"
     ADMIN = "ADMIN"
@@ -29,14 +26,12 @@ class User(db.Model):
     # create relation with channel
     channel = db.relationship('Channel', backref='user', lazy=True)
 
-    # create relation with channelsubscribers
-    channel_subscribers = db.relationship('ChannelSubscribers', backref='user', lazy=True)
+    # create relation with channel_subscriptions
+    channel_subscriptions = db.relationship('ChannelSubscriptions', backref='user', lazy=True)
 
-    # create relation with polling
-    polling = db.relationship('Polling', backref='user', lazy=True)
+    # create relation with survey_responses
+    survey_responses = db.relationship('SurveyResponses', backref='user', lazy=True)
 
-    # create relation with results
-    results = db.relationship('Results', backref='user', lazy=True)
 
     def __init__(self, first_name, last_name, email, password, role):
         self.first_name = first_name

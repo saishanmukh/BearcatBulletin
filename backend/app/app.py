@@ -16,6 +16,8 @@ from marshmallow import ValidationError
 
 from sqlalchemy.exc import IntegrityError
 
+from app.models import channelSubscriptions
+
 
 migrate = Migrate(compare_type=True)
 cors = CORS()
@@ -24,7 +26,8 @@ load_dotenv()
 
 
 def create_app(config_class=DevelopmentConfig):
-    from app.models import user, news, birthday, images, polling, userNews
+    from app.models import user, news, userNews, channel, images, channelSubscriptions, survey, surveyParties, surveyResponses
+    #  birthday, images, polling, 
     app = Flask(__name__)
     
     # Configure the app from config file

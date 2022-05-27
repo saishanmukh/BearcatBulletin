@@ -9,7 +9,7 @@ class News(db.Model):
     category = db.Column(db.String(80), nullable=False)
     hashtag = db.Column(db.String(80), nullable=True)
     posted_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    channel = db.Column(db.String(120), nullable=True)
+    channel_id = db.Column(db.Integer, db.ForeignKey('channel.channel_id'),nullable=True)
     posted_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
     edited_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
 
@@ -20,10 +20,10 @@ class News(db.Model):
     images = db.relationship('Images', backref='news', lazy=True)
 
     # create a relation with channel table
-    channel = db.relationship('Channel', backref='news', lazy=True)
+    # channel = db.relationship('Channel', backref='news', lazy=True)
 
-    # create a relation with telecastednews table
-    telecasted_news = db.relationship('TelecastedNews', backref='news', lazy=True)
+    # # create a relation with telecastednews table
+    # telecasted_news = db.relationship('TelecastedNews', backref='news', lazy=True)
 
     def __init__(self, headline, description, category, hashtag, posted_by, channel, posted_date, edited_date):
         self.headline = headline

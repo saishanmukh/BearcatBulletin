@@ -5,20 +5,13 @@ class Channel(db.Model):
 
     channel_id = db.Column(db.Integer, primary_key=True, autoincrement=True)    
     channel_name = db.Column(db.String(80), nullable=False)  
-    admin_id = db.Column(db.Integer, nullable=False)
-    subscribers = db.Column(db.String(80), nullable=False)
+    admin_user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    # create a relation with channel_subscribers table
-    channel_subscribers = db.relationship('ChannelSubscribers', backref='channel', lazy=True)
-
-    # create a relation with user table
-    user = db.relationship('User', backref='channel', lazy=True)
-
-    # create a relation with news table
+    # create a relation with channel_subscriptions table
+    channel_subscriptions = db.relationship('ChannelSubscriptions', backref='channel', lazy=True)
+    
+    # create a realtion with the news table
     news = db.relationship('News', backref='channel', lazy=True)
-
-    # create a relation with telecastednews table
-    telecasted_news = db.relationship('TelecastedNews', backref='channel', lazy=True)
 
     def __init__(self, channel_name, admin_id, subscribers):
         self.channel_name = channel_name
