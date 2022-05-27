@@ -1,9 +1,7 @@
 ### Front End:
 * cd .\Frontend\
-* ng new BearcatBulletin (creating the application)
-* npm install (or) npm i (installing for node modules)
-* ng serve (Builds and serve the application)
-* ng generate component **NameOfTheComponent** (or) ng g c **NameOfTheComponent** (Creating the component)
+* npm i
+* ng serve
 
 ### Backend:
 * Make sure you are in backend folder if not use below cmd.
