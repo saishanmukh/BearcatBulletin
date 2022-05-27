@@ -8,7 +8,6 @@ import { AppRegistrationComponent } from './app-registration/app-registration.co
 const routes: Routes = [
   {
     path: '',
-   // redirectTo: '',
     pathMatch: 'full',
     component: AppRegistrationComponent
   }, {
