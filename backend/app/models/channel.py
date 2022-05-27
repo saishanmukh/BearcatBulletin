@@ -13,18 +13,16 @@ class Channel(db.Model):
     # create a realtion with the news table
     news = db.relationship('News', backref='channel', lazy=True)
 
-    def __init__(self, channel_name, admin_id, subscribers):
+    def __init__(self, channel_name, admin_user_id):
         self.channel_name = channel_name
-        self.admin_id = admin_id
-        self.subscribers = subscribers
+        self.admin_user_id = admin_user_id
 
     def __repr__(self) -> str:
-        return f'<Channel id={self.channel_id}>'
+        return f'<Channel channel_id={self.channel_id}>'
 
     def json(self) -> dict:
         return {
             'channel_id': self.channel_id,
             'channel_name': self.channel_name,
-            'admin_id': self.admin_id,
-            'subscribers': self.subscribers
+            'admin_user_id': self.admin_user_id
         }

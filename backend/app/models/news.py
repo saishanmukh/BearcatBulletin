@@ -13,7 +13,7 @@ class News(db.Model):
     posted_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     channel_id = db.Column(db.Integer, db.ForeignKey('channel.channel_id'),nullable=True)
     posted_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
-    edited_date = db.Column(db.DateTime, nullable=False, default=db.func.current_timestamp())
+    edited_date = db.Column(db.DateTime, nullable=True)
 
     # create a relation with user_news table
     user_news = db.relationship('UserNews', backref='news', lazy=True)
@@ -21,19 +21,14 @@ class News(db.Model):
     # create a relation with images table
     images = db.relationship('Images', backref='news', lazy=True)
 
-    # create a relation with channel table
-    # channel = db.relationship('Channel', backref='news', lazy=True)
 
-    # # create a relation with telecastednews table
-    # telecasted_news = db.relationship('TelecastedNews', backref='news', lazy=True)
-
-    def __init__(self, headline, description, category, hashtag, posted_by, channel, posted_date, edited_date):
+    def __init__(self, headline, description, category, hashtag, posted_by, channel_id, posted_date, edited_date):
         self.headline = headline
         self.description = description
         self.category = category
         self.hashtag = hashtag
         self.posted_by = posted_by
-        self.channel = channel
+        self.channel_id = channel_id
         self.posted_date = posted_date
         self.edited_date = edited_date
 
@@ -49,7 +44,6 @@ class News(db.Model):
     def find_all_news(cls):
         # join news and images
         news = cls.query.join(Images, News.news_id == Images.news_id).order_by(desc(News.posted_date)).all()
-        print(news[0].images)
         return news
             
     
@@ -61,8 +55,8 @@ class News(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    # def __repr__(self) -> str:
-    #     return f'<News id={self.news_id}>'
+    def __repr__(self) -> str:
+        return f'<News news_id={self.news_id}>'
 
     def json(self) -> dict:
         return {
@@ -72,7 +66,7 @@ class News(db.Model):
             'category': self.category,
             'hashtag': self.hashtag,
             'posted_by': self.posted_by,
-            'channel': self.channel,
+            'channel_id': self.channel_id,
             'posted_date': self.posted_date,
             'edited_date': self.edited_date
         }

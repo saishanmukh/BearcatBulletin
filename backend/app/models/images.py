@@ -13,7 +13,7 @@ class Images(db.Model):
         self.url = url
 
     def __repr__(self) -> str:
-        return f'<Images id={self.image_id}>'  
+        return f'<Images image_id={self.image_id}>'  
 
     def json(self) -> dict:
         return {

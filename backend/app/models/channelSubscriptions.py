@@ -12,7 +12,7 @@ class ChannelSubscriptions(db.Model):
         self.subscriber_user_id = subscriber_user_id
 
     def __repr__(self) -> str:
-        return f'<ChannelSubscribers id={self.subscription_id}>'
+        return f'<ChannelSubscribers subscription_id={self.subscription_id}>'
 
     def json(self) -> dict:
         return {

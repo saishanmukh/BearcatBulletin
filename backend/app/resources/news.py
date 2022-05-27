@@ -3,7 +3,7 @@ from apifairy import body, response, other_responses, arguments
 
 
 from app.models.news import News
-from app.schemas.news import NewsSchema
+from app.schemas.news import NewsSchema, NewsSchemaWithImages
 
 NEWS_NOT_FOUND = "News not found"
 
@@ -16,7 +16,7 @@ news = Blueprint('news', __name__)
 
 # insert new news
 @news.route('/news', methods=['POST'])
-@body(NewsSchema)
+@body(NewsSchemaWithImages)
 @response(news_schema, 201)
 def create_news(news):
     """Create a news"""
@@ -38,7 +38,7 @@ def get_by_id(id):
 
 # get all news
 @news.route('/news', methods=['GET'])
-@response(news_schema_many, 200)
+@response(NewsSchemaWithImages, 200)
 def get_all():
     """Retrieve all news"""
     news = News.find_all_news()
