@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     // moduleId: module.id,
@@ -9,29 +11,49 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
     styleUrls: ['./navbar.component.css']
 })
 
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
     displayPostModal = "none";
     private listTitles!: any[];
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
+<<<<<<< HEAD
     firstName = localStorage.getItem('firstName');
+=======
+    newpostForm!: FormGroup;
+    public files: any[];
+    imageData =  new FormData();
+>>>>>>> 83d7eb56d230bbbdedf35fc1f3438e9050a2975a
 
-    constructor(location: Location,  private element: ElementRef) {
-      this.location = location;
-          this.sidebarVisible = false;
+
+    constructor(location: Location, private element: ElementRef, private formBuilder: FormBuilder, private http: HttpClient) {
+        this.location = location;
+        this.sidebarVisible = false;
+        this.files = [];
     }
 
+<<<<<<< HEAD
     ngOnInit(){
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
       console.log(this.firstName)
+=======
+    ngOnInit() {
+        this.listTitles = ROUTES.filter(listTitle => listTitle);
+        const navbar: HTMLElement = this.element.nativeElement;
+        this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+
+        this.newpostForm = this.formBuilder.group({
+            headline: this.formBuilder.control('', Validators.required),
+            headlineDesc: this.formBuilder.control('', Validators.required),
+        })
+>>>>>>> 83d7eb56d230bbbdedf35fc1f3438e9050a2975a
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const body = document.getElementsByTagName('body')[0];
-        setTimeout(function(){
+        setTimeout(function () {
             toggleButton.classList.add('toggled');
         }, 500);
         body.classList.add('nav-open');
@@ -54,30 +76,51 @@ export class NavbarComponent implements OnInit{
         }
     };
 
-    getTitle(){
-      var titlee = this.location.prepareExternalUrl(this.location.path());
-      if(titlee.charAt(0) === '#'){
-          titlee = titlee.slice( 1 );
-      }
+    getTitle() {
+        var titlee = this.location.prepareExternalUrl(this.location.path());
+        if (titlee.charAt(0) === '#') {
+            titlee = titlee.slice(1);
+        }
 
-      for(var item = 0; item < this.listTitles.length; item++){
-          if(this.listTitles[item].path === titlee){
-              return this.listTitles[item].title;
-          }
-      }
-      return 'Dashboard';
+        for (var item = 0; item < this.listTitles.length; item++) {
+            if (this.listTitles[item].path === titlee) {
+                return this.listTitles[item].title;
+            }
+        }
+        return 'Dashboard';
     }
 
-    menuToggle(){
+    menuToggle() {
         const toggleMenu = document.querySelector('.menu');
         toggleMenu?.classList.toggle('change')
     }
     openPopup() {
-    this.displayPostModal = "block";
+        this.displayPostModal = "block";
     }
     post() {
+        this.imageData.append("headline", this.newpostForm.get('headline')?.value);
+        this.imageData.append("headlineDesc", this.newpostForm.get('headlineDesc')?.value);
+        // this.imageData.forEach((value,key) => {
+        //     console.log(key+" "+value)
+        // });
+        this.http.post<any>("http://127.0.0.1:5000/api/users/login", this.imageData).subscribe({ next: (response) => console.log(response),
+        error: (error) => console.log(error),
+    })
     }
     close() {
         this.displayPostModal = "none";
+    }
+
+    onFileChanged(event: any) {
+        this.files = event.target.files;
+        this.onUpload()
+    }
+
+    onUpload() {
+        for (const file of this.files) {
+            this.imageData.set("post", file, file.name)
+            //this.formData.append("post", file, file.name);
         }
+       
+    }
 }
