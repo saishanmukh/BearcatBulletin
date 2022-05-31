@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit{
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    firstName = localStorage.getItem('firstName');
 
     constructor(location: Location,  private element: ElementRef) {
       this.location = location;
@@ -25,6 +26,7 @@ export class NavbarComponent implements OnInit{
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+      console.log(this.firstName)
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;
