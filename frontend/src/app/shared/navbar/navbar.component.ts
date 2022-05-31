@@ -17,13 +17,10 @@ export class NavbarComponent implements OnInit {
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
-<<<<<<< HEAD
     firstName = localStorage.getItem('firstName');
-=======
     newpostForm!: FormGroup;
     public files: any[];
     imageData =  new FormData();
->>>>>>> 83d7eb56d230bbbdedf35fc1f3438e9050a2975a
 
 
     constructor(location: Location, private element: ElementRef, private formBuilder: FormBuilder, private http: HttpClient) {
@@ -32,13 +29,6 @@ export class NavbarComponent implements OnInit {
         this.files = [];
     }
 
-<<<<<<< HEAD
-    ngOnInit(){
-      this.listTitles = ROUTES.filter(listTitle => listTitle);
-      const navbar: HTMLElement = this.element.nativeElement;
-      this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
-      console.log(this.firstName)
-=======
     ngOnInit() {
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         const navbar: HTMLElement = this.element.nativeElement;
@@ -48,7 +38,6 @@ export class NavbarComponent implements OnInit {
             headline: this.formBuilder.control('', Validators.required),
             headlineDesc: this.formBuilder.control('', Validators.required),
         })
->>>>>>> 83d7eb56d230bbbdedf35fc1f3438e9050a2975a
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;
