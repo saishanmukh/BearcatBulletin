@@ -48,8 +48,42 @@
                 <h4 class="modal-title">New Post</h4>
             </div>
             <div class="modal-body">
-                <p>One Stop Solution for all CS problems</p>
+                <form [formGroup]="newpostForm">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="headline">
+                                Headline
+                            </label>
+                        </div>
+                        <div class="col-xs-8">
+                            <input id="headline" type="text" formControlName="headline">
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="headlineDesc">
+                                Description
+                            </label>
+                        </div>
+                        <div class="col-xs-8">
+                            <input id="headlineDesc" type="text" formControlName="headlineDesc">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="postImage">
+                                Upload Image
+                            </label>
+                        </div>
+                        <div class="col-xs-8">
+                            <input id="postImage" type="file" name="postImage" (change)="onFileChanged($event)">
+                        </div>
+                    </div>
+
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" (click)="post()">
