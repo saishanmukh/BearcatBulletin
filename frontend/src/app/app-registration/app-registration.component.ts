@@ -59,6 +59,8 @@ export class AppRegistrationComponent implements OnInit {
     const headers = { 'Content-Type': 'application/json' };
     this.http.post<any>("http://127.0.0.1:5000/api/users/login", JSON.stringify(this.signinform.value),{ headers }).subscribe(data => {
      // alert("Succesfully login")
+     localStorage.setItem("userData",JSON.stringify(data))
+     localStorage.setItem("firstName",data.first_name)
       this.router.navigate(['/trending']); 
     },
     error =>{ alert("Incorrect Credentials"),
