@@ -94,6 +94,7 @@ export class NavbarComponent implements OnInit {
         this.http.post<any>("http://127.0.0.1:5000/api/users/login", this.imageData).subscribe({ next: (response) => console.log(response),
         error: (error) => console.log(error),
     })
+    this.displayPostModal = "none";
     }
     close() {
         this.displayPostModal = "none";
