@@ -14,7 +14,8 @@
     top: 60px;
     right:-4px;
     padding: 10px 20px;
-    background-color: #1c7f5f;
+    /* background: linear-gradient( .75turn, #1cd89d 0%); */
+    background-color: #1cd89d;
     width: 200px;
     box-sizing: 0 5px 25px black;
     border-radius: 15px;
@@ -37,16 +38,16 @@
     right: 28px;
     width: 20px;
     height: 20px;
-    background: #1c7f5f;
+    /* background: linear-gradient( .75turn, #1cd89d 0%); */
+    background-color: #1cd89d;
     transform: rotate(45deg);
 } 
 
 .menu h3{
     width: 100%;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     padding: 0px 0;
-    font-size: 18px;
     font-weight: 500;
     color: white;
     line-height: 1.2em;
@@ -62,7 +63,17 @@
     display: flex;
     align-items: center;
     text-align: center;
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
 }
+
+.menu ul li a{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+}
+
 
 .menu ul li img{
     max-width: 20px;
