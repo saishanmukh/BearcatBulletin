@@ -10,5 +10,5 @@ from app.models.images import Images
 class ImagesSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Images
-        fields = ("image_id", "news_id", "url")
+        fields = ("image_id", "news_id", "image_path")
         dump_only = ("image_id", )
