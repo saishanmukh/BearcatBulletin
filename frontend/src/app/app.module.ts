@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { TrendingComponent } from './trending/trending.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MatInputModule } from '@angular/material/input';
     AppRegistrationComponent,
     AdminLayoutComponent,
     CategoryComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    TrendingComponent
   ],
   exports: [AppRegistrationComponent, MatInputModule, MatFormFieldModule],
   imports: [

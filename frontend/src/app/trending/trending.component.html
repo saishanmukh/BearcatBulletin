@@ -1,0 +1,26 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div *ngFor="let card of dataFetched">
+                <div class="card" style="max-width: 830px;">
+                    <img src="http://localhost:5000/static/images/{{card.images[0].image_path}}" class="card-img"
+                        alt="..." style="max-width: 830px;" />
+                    <div class="card-img-overlay">
+                        <h5 class="card-title"> {{card.headline}} </h5>
+                        <p class="card-text">
+                            {{card.description}}
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <p class="card-text">{{card.posted_date}}</p>
+                            </div>
+                            <div class="col-sm-1"><img src="https://img.icons8.com/ios/30/000000/like--v1.png" /></div>
+                            <div class="col-sm-1"><img
+                                    src="https://img.icons8.com/ios-glyphs/30/000000/video-playlist.png" /></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
