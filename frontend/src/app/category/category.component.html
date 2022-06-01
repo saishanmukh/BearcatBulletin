@@ -1,41 +1,34 @@
 <div class="main-content">
-    <div class="category">
-        <div class="item">All</div>
-        <div class="item">Announcements</div>
-        <div class="item">Events</div>
-        <div class="item">Sports</div>
-        <div class="item">Health</div>
-        <div class="item">UPD</div>
-        <div class="item">Local</div>
-        <div class="item">Library</div>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="card" style="max-width: 830px;">
-                <img
-                  src="https://www.nwmissouri.edu/media/news/2022/04/images/220427textbookpickup.jpg"
-                  class="card-img"
-                  alt="..."
-                  style="max-width: 830px;"
-                />
-                <div class="card-img-overlay">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    Students are pictured above picking up their textbooks for the start of the fall 2021 semester.
-                    Students may return textbooks to Textbook Services, located in the lower level of The Station on the Northwest campus in Maryville, during regular business hours between 8 a.m. and 5 p.m.
-                    Monday through Friday. Textbooks must be returned by 5 p.m. Friday, May 6.
-                  </p>
-                 
-                  <div class="row">
-                    <div class="col-sm-10">
-                      <p class="card-text">Last updated 3 mins ago</p>
-                    </div>
-                    <div class="col-sm-1" ><img src="https://img.icons8.com/ios/30/000000/like--v1.png" /></div>
-                    <div class="col-sm-1"><img src="https://img.icons8.com/ios-glyphs/30/000000/video-playlist.png" /></div>
-                  </div>
-                  
-                </div>
+  <div class="category">
+    <div class="item">All</div>
+    <div class="item">Announcements</div>
+    <div class="item">Events</div>
+    <div class="item">Sports</div>
+    <div class="item">Health</div>
+    <div class="item">UPD</div>
+    <div class="item">Local</div>
+    <div class="item">Library</div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div *ngFor="let card of dataFetched">
+        <div class="card" style="max-width: 830px;">
+          <img src="http://localhost:5000/static/images/{{card.images[0].image_path}}" class="card-img" alt="..." style="max-width: 830px;" />
+          <div class="card-img-overlay">
+            <h5 class="card-title"> {{card.headline}} </h5>
+            <p class="card-text">
+              {{card.description}}
+            </p>
+            <div class="row">
+              <div class="col-sm-10">
+                <p class="card-text">{{card.posted_date}}</p>
               </div>
+              <div class="col-sm-1"><img src="https://img.icons8.com/ios/30/000000/like--v1.png" /></div>
+              <div class="col-sm-1"><img src="https://img.icons8.com/ios-glyphs/30/000000/video-playlist.png" /></div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
