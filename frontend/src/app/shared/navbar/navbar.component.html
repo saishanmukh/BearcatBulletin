@@ -13,8 +13,7 @@
 
             <ul class="nav navbar-nav navbar-right" style="color: white">
                 <li>
-                    <a (click)="openPopup()"
-                        style="margin-top: 12px; margin-bottom: 0px;">
+                    <a (click)="openPopup()" style="margin-top: 12px; margin-bottom: 0px;">
                         <i class="fa fa-plus-square-o" aria-hidden="true" style="font-size: 32px"></i>
                     </a>
                 </li>
@@ -23,11 +22,11 @@
                         <img src="/assets/images/profile.png" style="height: 40px" />
                     </a>
                     <div class="menu">
-                        <h3>pavan</h3>
+                        <h3>{{ firstName }}</h3>
                         <ul>
-                            <li><img src="/assets/images/user.png">My profile</li>
-                            <li><img src="/assets/images/edit.png">Edit profile</li>
-                            <li><img src="/assets/images/logout.png">Logout</li>
+                            <li><i class="fa fa-user" style="padding-right: 13%;"></i> My profile</li>
+                            <li><i class="fa fa-pencil-square-o" style="padding-right: 13%;"></i> Edit profile</li>
+                            <li><i class="fa fa-sign-out" style="padding-right: 13%;"></i><a href="#">Logout</a></li>
                         </ul>
                     </div>
 
@@ -48,11 +47,51 @@
                 <h4 class="modal-title">New Post</h4>
             </div>
             <div class="modal-body">
-                <p>One Stop Solution for all CS problems</p>
+                <form class="post-form" [formGroup]="newpostForm">
+                    <mat-form-field class="post-full-width" appearance="fill">
+                        <mat-label>Headline</mat-label>
+                        <input matInput placeholder="Enter Headline" formControlName="headline">
+                    </mat-form-field><br/>
 
+                    <mat-form-field hintLabel="Max 500 characters" class="post-full-width" appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput #desc maxlength="500" placeholder="Enter Description"
+                            formControlName="headlineDesc"></textarea>
+                        <mat-hint align="end">{{desc.value?.length || 0}}/500</mat-hint>
+                    </mat-form-field><br/><br/>
+
+                    <mat-form-field class="post-full-width" appearance="fill">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option value="announcements">Announcements</mat-option>
+                            <mat-option value="events">Events</mat-option>
+                            <mat-option value="sports">Sports</mat-option>
+                            <mat-option value="health">Health</mat-option>
+                            <mat-option value="upd">UPD</mat-option>
+                            <mat-option value="local">Local</mat-option>
+                            <mat-option value="library">Library</mat-option>
+                        </mat-select>
+                    </mat-form-field><br/><br/>
+
+
+
+                    
+
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label for="postImage">
+                                Upload Image *
+                            </label>
+                        </div>
+                        <div class="col-xs-8">
+                            <input id="postImage" type="file" name="postImage" (change)="onFileChanged($event)">
+                        </div>
+                    </div>
+
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" (click)="post()">
+                <button type="button" class="btn" (click)="post()">
                     Post
                 </button>
             </div>

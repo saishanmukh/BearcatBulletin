@@ -13,6 +13,8 @@ import { NavbarModule } from './shared/navbar/navbar.module';
 import { CategoryComponent } from './category/category.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     CategoryComponent,
     UserProfileComponent
   ],
-  exports: [AppRegistrationComponent],
+  exports: [AppRegistrationComponent, MatInputModule, MatFormFieldModule],
   imports: [
     BrowserModule,
     RouterModule,
@@ -32,7 +34,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     SidebarModule,
     FooterModule,
     NavbarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent],
