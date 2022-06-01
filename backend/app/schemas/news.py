@@ -12,13 +12,14 @@ from app.schemas.images import ImagesSchema
 class NewsSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = News
-        fields = ("news_id", "headline", "description", "category", "hashtag", "posted_by", "channel_id", "posted_date", "edited_date")
-        dump_only = ("news_id", )
+        fields = ("news_id", "headline", "description", "category", "hashtag", "posted_by", "channel_id", "posted_date", "edited_date", "images")
+        dump_only = ("news_id")
+    images = fields.Nested(ImagesSchema, many=True)
 
-    @pre_load
-    def pre_load(self, data):
-        print(data)
-        return data
+    # @post_load
+    # def pre_load(self, data):
+    #     print(data)
+    #     return data
 
 class NewsSchemaWithImages(ma.Schema):
     # def __init__(self, *args, **kwargs):
