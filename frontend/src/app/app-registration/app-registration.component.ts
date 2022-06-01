@@ -61,6 +61,7 @@ export class AppRegistrationComponent implements OnInit {
      // alert("Succesfully login")
      localStorage.setItem("userData",JSON.stringify(data))
      localStorage.setItem("firstName",data.first_name)
+     localStorage.setItem("ID",data.id)
       this.router.navigate(['/trending']); 
     },
     error =>{ alert("Incorrect Credentials"),

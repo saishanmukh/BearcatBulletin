@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     firstName = localStorage.getItem('firstName');
+    ID = localStorage.getItem('ID')
     newpostForm!: FormGroup;
     public files: any[];
     imageData = new FormData();
@@ -88,21 +89,31 @@ export class NavbarComponent implements OnInit {
         this.displayPostModal = "block";
     }
     post() {
-        this.imageData.append("headline", this.newpostForm.get('headline')?.value);
-        this.imageData.append("description", this.newpostForm.get('headlineDesc')?.value);
-        this.imageData.append("category", this.newpostForm.get('category')?.value);
-        this.imageData.append("posted_by", "1");
-        // console.log(JSON.stringify(this.imageData))
-        // this.imageData.forEach((value,key) => {
-        //     console.log(key+" "+value)
-        // });
-        this.http.post<any>("http://127.0.0.1:5000/api/news", this.imageData).subscribe({
-            next: (response) => console.log(response),
-            error: (error) => console.log(error),
-        })
-        this.displayPostModal = "none";
+        if (this.newpostForm.valid) {
+
+            this.imageData.append("headline", this.newpostForm.get('headline')?.value);
+            this.imageData.append("description", this.newpostForm.get('headlineDesc')?.value);
+            this.imageData.append("category", this.newpostForm.get('category')?.value);
+            this.imageData.append("posted_by", this.ID!);
+            // console.log(JSON.stringify(this.imageData))
+            // this.imageData.forEach((value,key) => {
+            //     console.log(key+" "+value)
+            // });
+            this.http.post<any>("http://127.0.0.1:5000/api/news", this.imageData).subscribe({
+                next: (response) => console.log(response),
+                error: (error) => console.log(error),
+            })
+            this.displayPostModal = "none";
+            this.newpostForm.reset()
+        } else {
+            Object.keys(this.newpostForm.controls).forEach(field => { // {1}
+                const control = this.newpostForm.get(field);            // {2}
+                control?.markAsTouched({ onlySelf: true });       // {3}
+            });
+        }
     }
     close() {
+        this.newpostForm.reset()
         this.displayPostModal = "none";
     }
 
