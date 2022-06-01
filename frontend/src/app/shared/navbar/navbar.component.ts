@@ -89,11 +89,14 @@ export class NavbarComponent implements OnInit {
     }
     post() {
         this.imageData.append("headline", this.newpostForm.get('headline')?.value);
-        this.imageData.append("headlineDesc", this.newpostForm.get('headlineDesc')?.value);
+        this.imageData.append("description", this.newpostForm.get('headlineDesc')?.value);
+        this.imageData.append("category", this.newpostForm.get('category')?.value);
+        this.imageData.append("posted_by", "1");
+        // console.log(JSON.stringify(this.imageData))
         // this.imageData.forEach((value,key) => {
         //     console.log(key+" "+value)
         // });
-        this.http.post<any>("http://127.0.0.1:5000/api/users/login", this.imageData).subscribe({
+        this.http.post<any>("http://127.0.0.1:5000/api/news", this.imageData).subscribe({
             next: (response) => console.log(response),
             error: (error) => console.log(error),
         })
@@ -110,7 +113,7 @@ export class NavbarComponent implements OnInit {
 
     onUpload() {
         for (const file of this.files) {
-            this.imageData.set("post", file, file.name)
+            this.imageData.set("image", file, file.name)
             //this.formData.append("post", file, file.name);
         }
 
