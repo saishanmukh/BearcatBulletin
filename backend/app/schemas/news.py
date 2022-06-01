@@ -15,6 +15,11 @@ class NewsSchema(ma.SQLAlchemyAutoSchema):
         fields = ("news_id", "headline", "description", "category", "hashtag", "posted_by", "channel_id", "posted_date", "edited_date")
         dump_only = ("news_id", )
 
+    @pre_load
+    def pre_load(self, data):
+        print(data)
+        return data
+
 class NewsSchemaWithImages(ma.Schema):
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
@@ -80,17 +85,48 @@ class CreateNewsSchema(ma.SQLAlchemyAutoSchema):
 
 
 class NewsSchemaFilterArguments(ma.Schema):
-    include = fields.List(fields.String(validate=validate.ContainsOnly(["images", "user"])), required=False, \
+    include = fields.List(fields.String(validate=validate.OneOf(["images", "user"])), required=False, \
         default=["images"], description="Include fields in response")
 
-    @pre_dump
-    def process_include(self, data, **kwargs):
-        if "include" in data:
-            if "images" in data["include"]:
-                data["include"].remove("images")
-                data["include"].append("images")
-            if "user" in data["include"]:
-                data["include"].remove("user")
-                data["include"].append("user")
-        return data
+    # @post_load
+    # def make_object(self, data, **kwargs):
+    #     data['images'] = True
+    #     return data
+
+    # @pre_dump
+    # def make_object(self, data, **kwargs):
+    #     data['images'] = True
+    #     print(data)
+    #     return data
+    
+    # @post_dump
+    # def make_object(self, data, **kwargs):
+    #     data['images'] = True
+    #     print(data)
+    #     return data
+
+    # @post_load
+    # def make_object(self, data, **kwargs):
+    #     data['images'] = True
+    #     print(data)
+    #     return data
+    
+    # @pre_load
+    # def make_object(self, data, **kwargs):
+    #     data['images'] = True
+    #     print(data)
+    #     return data
+
+    
+
+
+    # def process_include(self, data, **kwargs):
+    #     if "include" in data:
+    #         if "images" in data["include"]:
+    #             data["include"].remove("images")
+    #             data["include"].append("images")
+    #         if "user" in data["include"]:
+    #             data["include"].remove("user")
+    #             data["include"].append("user")
+    #     return data
 

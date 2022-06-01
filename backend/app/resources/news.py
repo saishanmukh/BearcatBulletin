@@ -4,7 +4,6 @@ from pyexpat import ErrorString
 from flask import Blueprint, abort, jsonify, Response, request
 from apifairy import body, response, other_responses, arguments
 from marshmallow import fields
-from numpy import absolute
 
 from app.models.news import News
 from app.schemas.news import NewsSchema, NewsSchemaWithImages, NewsSchemaFilterArguments, CreateNewsSchema
@@ -81,7 +80,7 @@ def get_by_id(id):
 
 # get all news
 @news.route('/news', methods=['GET'])
-@response(NewsSchema)
+@response(news_schema_many)
 @arguments(NewsSchemaFilterArguments)
 def get_all(filter_args):
     """Retrieve all news"""
