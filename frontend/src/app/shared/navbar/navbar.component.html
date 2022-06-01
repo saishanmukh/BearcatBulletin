@@ -13,8 +13,7 @@
 
             <ul class="nav navbar-nav navbar-right" style="color: white">
                 <li>
-                    <a (click)="openPopup()"
-                        style="margin-top: 12px; margin-bottom: 0px;">
+                    <a (click)="openPopup()" style="margin-top: 12px; margin-bottom: 0px;">
                         <i class="fa fa-plus-square-o" aria-hidden="true" style="font-size: 32px"></i>
                     </a>
                 </li>
@@ -25,9 +24,9 @@
                     <div class="menu">
                         <h3>{{ firstName }}</h3>
                         <ul>
-                            <li><i class="fa fa-user" style="padding-right: 13%;"></i>   My profile</li>
+                            <li><i class="fa fa-user" style="padding-right: 13%;"></i> My profile</li>
                             <li><i class="fa fa-pencil-square-o" style="padding-right: 13%;"></i> Edit profile</li>
-                            <li><i class="fa fa-sign-out"style="padding-right: 13%;"></i><a href="#">Logout</a></li>
+                            <li><i class="fa fa-sign-out" style="padding-right: 13%;"></i><a href="#">Logout</a></li>
                         </ul>
                     </div>
 
@@ -48,34 +47,40 @@
                 <h4 class="modal-title">New Post</h4>
             </div>
             <div class="modal-body">
-                <form [formGroup]="newpostForm">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <label for="headline">
-                                Headline
-                            </label>
-                        </div>
-                        <div class="col-xs-8">
-                            <input id="headline" type="text" formControlName="headline">
-                        </div>
-                    </div>
+                <form class="post-form" [formGroup]="newpostForm">
+                    <mat-form-field class="post-full-width" appearance="fill">
+                        <mat-label>Headline</mat-label>
+                        <input matInput placeholder="Enter Headline" formControlName="headline">
+                    </mat-form-field><br/>
 
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <label for="headlineDesc">
-                                Description
-                            </label>
-                        </div>
-                        <div class="col-xs-8">
-                            <input id="headlineDesc" type="text" formControlName="headlineDesc">
-                        </div>
-                    </div>
+                    <mat-form-field hintLabel="Max 500 characters" class="post-full-width" appearance="fill">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput #desc maxlength="500" placeholder="Enter Description"
+                            formControlName="headlineDesc"></textarea>
+                        <mat-hint align="end">{{desc.value?.length || 0}}/500</mat-hint>
+                    </mat-form-field><br/><br/>
 
+                    <mat-form-field class="post-full-width" appearance="fill">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option value="announcements">Announcements</mat-option>
+                            <mat-option value="events">Events</mat-option>
+                            <mat-option value="sports">Sports</mat-option>
+                            <mat-option value="health">Health</mat-option>
+                            <mat-option value="upd">UPD</mat-option>
+                            <mat-option value="local">Local</mat-option>
+                            <mat-option value="library">Library</mat-option>
+                        </mat-select>
+                    </mat-form-field><br/><br/>
+
+
+
+                    
 
                     <div class="row">
                         <div class="col-xs-4">
                             <label for="postImage">
-                                Upload Image
+                                Upload Image *
                             </label>
                         </div>
                         <div class="col-xs-8">
@@ -86,7 +91,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" (click)="post()">
+                <button type="button" class="btn" (click)="post()">
                     Post
                 </button>
             </div>

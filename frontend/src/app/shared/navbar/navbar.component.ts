@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
     firstName = localStorage.getItem('firstName');
     newpostForm!: FormGroup;
     public files: any[];
-    imageData =  new FormData();
+    imageData = new FormData();
 
 
     constructor(location: Location, private element: ElementRef, private formBuilder: FormBuilder, private http: HttpClient) {
@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
         this.newpostForm = this.formBuilder.group({
             headline: this.formBuilder.control('', Validators.required),
             headlineDesc: this.formBuilder.control('', Validators.required),
+            category: this.formBuilder.control('', Validators.required),
         })
     }
     sidebarOpen() {
@@ -92,10 +93,11 @@ export class NavbarComponent implements OnInit {
         // this.imageData.forEach((value,key) => {
         //     console.log(key+" "+value)
         // });
-        this.http.post<any>("http://127.0.0.1:5000/api/users/login", this.imageData).subscribe({ next: (response) => console.log(response),
-        error: (error) => console.log(error),
-    })
-    this.displayPostModal = "none";
+        this.http.post<any>("http://127.0.0.1:5000/api/users/login", this.imageData).subscribe({
+            next: (response) => console.log(response),
+            error: (error) => console.log(error),
+        })
+        this.displayPostModal = "none";
     }
     close() {
         this.displayPostModal = "none";
@@ -111,6 +113,6 @@ export class NavbarComponent implements OnInit {
             this.imageData.set("post", file, file.name)
             //this.formData.append("post", file, file.name);
         }
-       
+
     }
 }

@@ -3,7 +3,7 @@
 }
 
 .navbar-brand {
-    color: white;
+    color: white !important;
 }
 
 .navbar-sticky {
@@ -96,4 +96,18 @@
 
 .posticon:hover {
     background: gray;
+}
+
+.form-style {
+    width: 170px;
+}
+
+.post-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.post-full-width {
+    width: 100%;
 }
