@@ -1,3 +1,4 @@
+from email.policy import default
 from flask import Flask, redirect, url_for, jsonify
 from flask_migrate import Migrate
 from flask_cors import CORS
@@ -25,6 +26,61 @@ apifairy = APIFairy()
 load_dotenv()
 
 
+@apifairy.error_handler
+def my_error_handler(status_code, messages):
+    return {'code': status_code, 'messages': messages}, status_code
+
+@apifairy.process_apispec
+def my_apispec_processor(spec):
+    # modify spec as needed here
+    print("********************************")
+    # spec["paths"]["/api/news"]["post"]['requestBody']['content']['multipart/form-data'] = {'application/json': {'schema': {'$ref': '#/components/schemas/News'}}}
+    
+    spec["paths"]["/api/news"]["post"] = {'operationId': 'news_create_news', 
+    'parameters': [], 'tags': ['News'], 'summary': 'Create a news', 
+    'responses': {'200': {'content': {'application/json': {'schema': {'$ref': '#/components/schemas/News'}}}, 'description': 'OK'}}, 
+    'requestBody': {'content': {'multipart/form-data': 
+    {'schema':     { "type": "object",
+    'required': ['headline', 'description', 'posted_by', 'category', 'image'],
+    "properties":
+          {"headline": {"type": "string"},
+            "description" : {"type": "string"},
+            "category" : {"type": "string"},
+            "hashtag" : {"type": "string"},
+            "posted_by" : {"type": "integer"},
+            "channel_id" : {"type": "integer"},
+            "image": {"type": "string", "format": "binary"}},
+        "encoding": {
+            "image": {
+                "contentType": "image/jpeg",
+                }}}
+                }
+                
+                }}}
+
+    # print(spec["paths"]["/api/news"]["post"])
+
+    # { "type": "object",
+    # "required": ["id"],
+    #     "properties":
+    #       {"id": {"type": "string", "format": "uuid"},
+    #       "profileImage": {"type": "string", "format": "binary"}},
+    #     "encoding": {
+    #         "profileImage": {
+    #             "contentType": "image/jpeg",
+    #             "headers": {
+    #                 "Content-Type": "image/jpeg"
+    #             }}}}
+    # print("********************************")
+    return spec
+
+# @APIFairy().process_apispec
+# def format_news(spec):
+#     return spec
+    # print(news)
+    # news_schema_many.context["include"] = request.args.getlist("include")
+    # return news_schema_many.dump(news)
+
 def create_app(config_class=DevelopmentConfig):
     from app.models import user, news, userNews, channel, images, channelSubscriptions, survey, surveyParties, surveyResponses
     #  birthday, images, polling, 
@@ -51,12 +107,15 @@ def create_app(config_class=DevelopmentConfig):
     # register blueprints
     from app.resources.user import users
     from app.resources.news import news
+    from app.resources.channel import channel
 
 
 
 
     app.register_blueprint(users, url_prefix='/api')
     app.register_blueprint(news, url_prefix='/api')
+    app.register_blueprint(channel, url_prefix='/api')
+
 
     
     @app.errorhandler(Exception)

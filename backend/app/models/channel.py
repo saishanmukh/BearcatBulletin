@@ -26,3 +26,19 @@ class Channel(db.Model):
             'channel_name': self.channel_name,
             'admin_user_id': self.admin_user_id
         }
+
+    @classmethod
+    def find_by_id(cls, channel_id: int) -> 'Channel':
+        return cls.query.filter_by(channel_id=channel_id).first()
+
+    @classmethod
+    def find_all_channels(cls) -> list:
+        return cls.query.all()
+    
+    def save_to_db(self) -> None:
+        db.session.add(self)
+        db.session.commit()
+    
+    def delete_from_db(self) -> None:
+        db.session.delete(self)
+        db.session.commit()

@@ -22,7 +22,7 @@ class News(db.Model):
     images = db.relationship('Images', backref='news', lazy=True)
 
 
-    def __init__(self, headline, description, category, hashtag, posted_by, channel_id, posted_date, edited_date):
+    def __init__(self, headline, description, category,  posted_by, hashtag= None,  channel_id =  None, posted_date = None,  edited_date = None):
         self.headline = headline
         self.description = description
         self.category = category
@@ -42,10 +42,16 @@ class News(db.Model):
 
     @classmethod
     def find_all_news(cls):
-        # join news and images
         news = cls.query.join(Images, News.news_id == Images.news_id).order_by(desc(News.posted_date)).all()
         return news
-            
+
+    @classmethod
+    def find_all_news_include(cls, include: list):
+        news = cls.query.join(Images, News.news_id == Images.news_id).order_by(desc(News.posted_date)).all()
+        return news
+
+        # news = cls.query.join(Images, News.news_id == Images.news_id).order_by(desc(News.posted_date)).all()
+        # return news
     
     def save_to_db(self) -> None:
         db.session.add(self)
