@@ -2,13 +2,15 @@
     <div class="container" #container id="container">
         <div class="form-container sign-up-container">
 
-            <form [formGroup]="signupform" (ngSubmit)="signup()">
+            <form [formGroup]="signupform">
                 <h1>Create Account</h1>
                 <input type="text" formControlName="first_name" placeholder="Enter your First Name">
                 <input type="text" formControlName="last_name" placeholder="Enter your Last Name">
                 <input type="email" formControlName="email" placeholder="Enter your Email ID">
-                <input type="password" formControlName="password" placeholder="Enter your password">
-                <button>SignUp</button>
+                <button (click)="verify()">Verify email</button>
+                <input type="password" [ngStyle]="{'visibility':isDivVisible ? 'visible' : 'hidden'}" formControlName="otp_code" placeholder="Enter your registration code" >
+                <input type="password" [ngStyle]="{'visibility':isDivVisible ? 'visible' : 'hidden'}" formControlName="password" placeholder="Enter your password">
+                <button [ngStyle]="{'visibility':isDivVisible ? 'visible' : 'hidden'}" (click)="signup()">SignUp</button>
             </form>
         </div>
         <div class="form-container sign-in-container">

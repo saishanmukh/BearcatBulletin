@@ -17,6 +17,7 @@ export class AppRegistrationComponent implements OnInit {
   signinform!: FormGroup;
   loading = false;
   submitted = false;
+  isDivVisible = false;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -26,12 +27,14 @@ export class AppRegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isDivVisible = false;
       this.signupform = this.formBuilder.group({
         first_name: this.formBuilder.control('', Validators.required),
         last_name: this.formBuilder.control('', Validators.required),
         // dob: this.formBuilder.control('', Validators.required),
         email: this.formBuilder.control('', Validators.required),
         password: this.formBuilder.control('', [Validators.required, Validators.minLength(6)]),
+        otp_code: this.formBuilder.control('', Validators.required),
         role: this.formBuilder.control('USER',  [Validators.required, Validators.minLength(6)]),
     });
     this.signinform = this.formBuilder.group({
@@ -41,18 +44,50 @@ export class AppRegistrationComponent implements OnInit {
   }
 
   signup(){
-    console.log(JSON.stringify(this.signupform.value))
+    console.log(JSON.stringify({'email':this.signupform.value.email,
+    'password':this.signupform.value.password,
+    'otp_code':this.signupform.value.otp_code}))
     const headers = { 'Content-Type': 'application/json' };
-    this.http.post<any>("http://127.0.0.1:5000/api/users", JSON.stringify(this.signupform.value),{ headers }).subscribe(data => {
+    this.http.post<any>("http://127.0.0.1:5000/api/users/register", JSON.stringify({'email':this.signupform.value.email,
+    'password':this.signupform.value.password,
+    'otp_code':this.signupform.value.otp_code})
+    ,{ headers }).subscribe(data => {
     this.signupform.reset() 
     this.signinchange()
-
     },
-    error => {alert("This Account is already registerd")
+    error => {
+      alert("This Account is already registerd")
     this.signupform.reset() 
   }
     )
     console.log(this.signupform.value);
+  }
+
+  verify(){
+    alert("Verify")
+    // remove password
+    this.signupform;
+    console.log(JSON.stringify({'email':this.signupform.value.email,
+                                'first_name':this.signupform.value.first_name,
+                                'last_name':this.signupform.value.last_name,
+                                "role": "USER"}))
+    const headers = { 'Content-Type': 'application/json' };
+    this.http.post<any>("http://127.0.0.1:5000/api/users", JSON.stringify({'email':this.signupform.value.email,
+    'first_name':this.signupform.value.first_name,
+    'last_name':this.signupform.value.last_name,
+    "role": "USER"}),{ headers }).subscribe(data => {
+      // unhide password
+      this.isDivVisible = true;
+
+    // this.signupform.reset() 
+    // this.signinchange()
+
+    },
+    error => {alert("This Account is already registerd")
+    // this.signupform.reset() 
+  }
+    )
+    // console.log(this.signupform.value);
   }
 
   signin(){
