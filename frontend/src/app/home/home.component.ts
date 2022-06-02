@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
+import { LocationStrategy, PlatformLocation, Location, DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NEWS } from 'src/interface/news';
 
@@ -53,11 +53,14 @@ export class HomeComponent implements OnInit {
   //   updatedby: "Last updated 3 mins ago"
   // }
   // ]
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
       this.dataFetched = data;
+      this.dataFetched.forEach(obj => {
+        obj.updated_date = this.datePipe.transform(obj.posted_date, 'MMM d, y, h:mm a');
+      });
     })
   }
 

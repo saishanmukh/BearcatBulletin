@@ -1,7 +1,7 @@
 import { IMAGES } from "./images";
 
 export interface NEWS {
-    date: string | null;
+    updated_date: string | null;
     category: String,
     channel_id: String,
     description: String,

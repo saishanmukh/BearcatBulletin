@@ -18,14 +18,15 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.All()
-    this.dataFetched.forEach(obj => {
-      obj.date = this.datePipe.transform(obj.posted_date, 'yyyy-MM-dd');
-    });
+    
   }
 
   All() {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
       this.dataFetched = data;
+      this.dataFetched.forEach(obj => {
+        obj.updated_date = this.datePipe.transform(obj.posted_date, 'MMM d, y, h:mm a');
+      });
     })
   }
 
@@ -35,6 +36,9 @@ export class CategoryComponent implements OnInit {
         return el.category == "announcements"
       }
       );
+      this.dataFetched.forEach(obj => {
+        obj.updated_date = this.datePipe.transform(obj.posted_date, 'MMM d, y, h:mm a');
+      });
     })
   }
 
@@ -44,6 +48,9 @@ export class CategoryComponent implements OnInit {
         return el.category == "events"
       }
       );
+      this.dataFetched.forEach(obj => {
+        obj.updated_date = this.datePipe.transform(obj.posted_date, 'MMM d, y, h:mm a');
+      });
     })
   }
 
@@ -53,6 +60,9 @@ export class CategoryComponent implements OnInit {
         return el.category == "sports"
       }
       );
+      this.dataFetched.forEach(obj => {
+        obj.updated_date = this.datePipe.transform(obj.posted_date, 'MMM d, y, h:mm a');
+      });
     })
   }
 
@@ -62,6 +72,9 @@ export class CategoryComponent implements OnInit {
         return el.category == "health"
       }
       );
+      this.dataFetched.forEach(obj => {
+        obj.updated_date = this.datePipe.transform(obj.posted_date, 'MMM d, y, h:mm a');
+      });
     })
   }
   UPD() {
@@ -70,6 +83,9 @@ export class CategoryComponent implements OnInit {
         return el.category == "upd"
       }
       );
+      this.dataFetched.forEach(obj => {
+        obj.updated_date = this.datePipe.transform(obj.posted_date, 'MMM d, y, h:mm a');
+      });
     })
   }
   Local() {
@@ -78,6 +94,9 @@ export class CategoryComponent implements OnInit {
         return el.category == "local"
       }
       );
+      this.dataFetched.forEach(obj => {
+        obj.updated_date = this.datePipe.transform(obj.posted_date, 'MMM d, y, h:mm a');
+      });
     })
   }
   Library() {
@@ -86,6 +105,9 @@ export class CategoryComponent implements OnInit {
         return el.category == "library"
       }
       );
+      this.dataFetched.forEach(obj => {
+        obj.updated_date = this.datePipe.transform(obj.posted_date, 'MMM d, y, h:mm a');
+      });
     })
   }
 
