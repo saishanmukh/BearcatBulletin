@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IMAGES } from 'src/interface/images';
 import { NEWS } from 'src/interface/news';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-category',
@@ -13,19 +14,22 @@ export class CategoryComponent implements OnInit {
   dataFetched!: NEWS[];
   toggle = true;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.All()
+    this.dataFetched.forEach(obj => {
+      obj.date = this.datePipe.transform(obj.posted_date, 'yyyy-MM-dd');
+    });
   }
 
-  All(){
+  All() {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
       this.dataFetched = data;
     })
   }
 
-  Announcements(){
+  Announcements() {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
       this.dataFetched = data.filter(function (el) {
         return el.category == "announcements"
@@ -34,7 +38,7 @@ export class CategoryComponent implements OnInit {
     })
   }
 
-  Events(){
+  Events() {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
       this.dataFetched = data.filter(function (el) {
         return el.category == "events"
@@ -43,7 +47,7 @@ export class CategoryComponent implements OnInit {
     })
   }
 
-  Sports(){
+  Sports() {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
       this.dataFetched = data.filter(function (el) {
         return el.category == "sports"
@@ -52,7 +56,7 @@ export class CategoryComponent implements OnInit {
     })
   }
 
-  Health(){
+  Health() {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
       this.dataFetched = data.filter(function (el) {
         return el.category == "health"
@@ -60,7 +64,7 @@ export class CategoryComponent implements OnInit {
       );
     })
   }
-  UPD(){
+  UPD() {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
       this.dataFetched = data.filter(function (el) {
         return el.category == "upd"
@@ -68,7 +72,7 @@ export class CategoryComponent implements OnInit {
       );
     })
   }
-  Local(){
+  Local() {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
       this.dataFetched = data.filter(function (el) {
         return el.category == "local"
@@ -76,7 +80,7 @@ export class CategoryComponent implements OnInit {
       );
     })
   }
-  Library(){
+  Library() {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
       this.dataFetched = data.filter(function (el) {
         return el.category == "library"
