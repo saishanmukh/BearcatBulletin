@@ -41,7 +41,7 @@ import { DatePipe } from '@angular/common';
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, TrendingComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

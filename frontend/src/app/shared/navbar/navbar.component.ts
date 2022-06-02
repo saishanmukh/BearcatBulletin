@@ -3,7 +3,7 @@ import { ROUTES } from '../../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
+import { TrendingComponent } from 'src/app/trending/trending.component';
 @Component({
     // moduleId: module.id,
     selector: 'navbar-cmp',
@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     imageData = new FormData();
 
 
-    constructor(location: Location, private element: ElementRef, private formBuilder: FormBuilder, private http: HttpClient) {
+    constructor(location: Location, private element: ElementRef, private formBuilder: FormBuilder, private http: HttpClient, private trending: TrendingComponent) {
         this.location = location;
         this.sidebarVisible = false;
         this.files = [];
@@ -105,6 +105,8 @@ export class NavbarComponent implements OnInit {
             })
             this.displayPostModal = "none";
             this.newpostForm.reset();
+            this.trending.getData();
+            window.location.reload();
         } else {
             Object.keys(this.newpostForm.controls).forEach(field => { // {1}
                 const control = this.newpostForm.get(field);            // {2}
