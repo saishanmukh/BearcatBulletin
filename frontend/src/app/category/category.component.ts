@@ -21,7 +21,6 @@ export class CategoryComponent implements OnInit {
 
   All(){
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
-      console.log(data);
       this.dataFetched = data;
     })
   }
@@ -85,6 +84,5 @@ export class CategoryComponent implements OnInit {
       );
     })
   }
-
 
 }

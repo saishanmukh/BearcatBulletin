@@ -15,7 +15,6 @@ export class TrendingComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get<NEWS[]>("http://127.0.0.1:5000/api/news").subscribe(data => {
-      console.log(data);
       this.dataFetched = data;
     })
   }
