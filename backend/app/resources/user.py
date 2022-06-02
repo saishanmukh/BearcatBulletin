@@ -25,7 +25,10 @@ def create_user(user):
     # check if mail contains @nwmissouri.edu
     if not user["email"].endswith('@nwmissouri.edu'):
         return abort(Response(f'Email must end with @nwmissouri.edu', status=400))
-
+    
+    fetched_user = User.find_by_email(user["email"])
+    if  fetched_user:
+        return abort(Response("user exists", status=400))
     # generate a random token
     user["password"] = generate_token()
     send_email(user["email"], user["password"])
