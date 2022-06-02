@@ -81,8 +81,9 @@ def get_by_id(id):
 # get all news
 @news.route('/news', methods=['GET'])
 @response(news_schema_many)
-@arguments(NewsSchemaFilterArguments)
-def get_all(filter_args):
+# @arguments(NewsSchemaFilterArguments)
+def get_all():
     """Retrieve all news"""
     news = News.find_all_news()
+    print(news)
     return news

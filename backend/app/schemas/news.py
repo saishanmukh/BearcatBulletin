@@ -14,24 +14,24 @@ from app.schemas.images import ImagesSchema
 class NewsSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = News
-        fields = ("news_id", "headline", "description", "category", "hashtag", "posted_by", "channel_id", "posted_date", "edited_date", "images", "user")
+        fields = ("news_id", "headline", "description", "category", "hashtag", "posted_by", "channel_id", "posted_date", "edited_date", "images")
         dump_only = ("news_id")
     images = fields.Nested(ImagesSchema, many=True, only=("image_path", ))
-    user = fields.Nested("UserSchema", only=('first_name', 'last_name', 'id'))
+    # user = fields.Nested("UserSchema", only=('first_name', 'last_name', 'id'))
 
 
 
-    @pre_dump
-    def process_output(self, data, **kwargs):
-        print(data)
-        return data
+    # @pre_dump
+    # def process_output(self, data, **kwargs):
+    #     print(data)
+    #     return data
 
-    @post_dump
-    def process_output(self, data, **kwargs):
-        print(request.args.getlist("include"))
-        print(data)
-        # data['user'] = True
-        return data
+    # @post_dump
+    # def process_output(self, data, **kwargs):
+    #     print(request.args.getlist("include"))
+    #     print(data)
+    #     # data['user'] = True
+    #     return data
 
 class NewsSchemaWithImages(ma.Schema):
     # def __init__(self, *args, **kwargs):

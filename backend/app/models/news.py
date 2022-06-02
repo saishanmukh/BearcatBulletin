@@ -6,7 +6,7 @@ class News(db.Model):
     __table__name = 'news'
 
     news_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    headline = db.Column(db.String(500), nullable=False)
+    headline = db.Column(db.String(1000), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
     category = db.Column(db.String(80), nullable=False)
     hashtag = db.Column(db.String(80), nullable=True)

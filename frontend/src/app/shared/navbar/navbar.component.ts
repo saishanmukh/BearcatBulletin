@@ -90,10 +90,10 @@ export class NavbarComponent implements OnInit {
     }
     post() {
         if (this.newpostForm.valid) {
-            this.imageData.append("headline", this.newpostForm.get('headline')?.value);
-            this.imageData.append("description", this.newpostForm.get('headlineDesc')?.value);
-            this.imageData.append("category", this.newpostForm.get('category')?.value);
-            this.imageData.append("posted_by", localStorage.getItem('ID')!);
+            this.imageData.set("headline", this.newpostForm.get('headline')?.value);
+            this.imageData.set("description", this.newpostForm.get('headlineDesc')?.value);
+            this.imageData.set("category", this.newpostForm.get('category')?.value);
+            this.imageData.set("posted_by", localStorage.getItem('ID')!);
             this.imageData.forEach((value,key) => {
                 console.log(key+" "+value)
             });
