@@ -7,7 +7,7 @@ class News(db.Model):
 
     news_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     headline = db.Column(db.String(80), nullable=False)
-    description = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.String(500), nullable=False)
     category = db.Column(db.String(80), nullable=False)
     hashtag = db.Column(db.String(80), nullable=True)
     posted_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
