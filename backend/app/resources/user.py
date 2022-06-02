@@ -2,8 +2,10 @@ from flask import Blueprint, abort, jsonify, Response
 from apifairy import body, response, other_responses, arguments
 
 from app.models.user import User
-from app.schemas.user import UserSchema, UserFilterQueryParamsSchema, UserLoginSchema
+from app.schemas.user import UserSchema, UserFilterQueryParamsSchema, UserLoginSchema, UserSchemaForSignup, UserSchemaForSignupWithToken
 from app.schemas import OrderByFilterSchema
+from app.utils.mail import send_email
+from app.utils.random_password import generate_token
 
 USER_NOT_FOUND = "User not found"
 
@@ -16,14 +18,38 @@ users = Blueprint('users', __name__)
 
 # insert new user
 @users.route('/users', methods=['POST'])
-@body(UserSchema)
+@body(UserSchemaForSignup)
 @response(user_schema, 201)
 def create_user(user):
     """Create a user"""
+    # check if mail contains @nwmissouri.edu
+    if not user["email"].endswith('@nwmissouri.edu'):
+        return abort(Response(f'Email must end with @nwmissouri.edu', status=400))
+
+    # generate a random token
+    user["password"] = generate_token()
+    send_email(user["email"], user["password"])
+    
     user = User(**user)
     user.save_to_db()
     return user, 201
 
+# validate user token
+@users.route('/users/register', methods=['POST'])
+@body(UserSchemaForSignupWithToken)
+@response(user_schema)
+def validate_user_token(user):
+    """Sign up user"""
+    fetched_user = User.find_by_email(user["email"])
+    if not fetched_user:
+        return abort(Response(USER_NOT_FOUND, status=400))
+
+    if fetched_user.password != user['otp_code']:
+        return abort(Response('Invalid Code', status=400))
+    else:
+        fetched_user.password = user["password"]
+        fetched_user.save_to_db()
+        return fetched_user
 
 # retrieve a user by id
 @users.route('/users/<int:id>', methods=['GET'])

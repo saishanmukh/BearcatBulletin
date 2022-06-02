@@ -72,10 +72,30 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     def get_role(self, obj) -> str:
         return obj.role.value
 
+class UserSchemaForSignup(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        ordered = True
+        fields = ("id", "email", "first_name", "last_name", "role", )
+        dump_only = ("id", )
+
+    @pre_dump
+    def pre_dump(self, data,  **kwargs):
+        data.role = data.role.value
+        return data
+
+    def get_role(self, obj) -> str:
+        return obj.role.value
+
+
 class UserLoginSchema(ma.Schema):
     email = fields.Str(required=True)
     password = fields.Str(required=True)
 
+class UserSchemaForSignupWithToken(ma.Schema):
+    email = fields.Str(required=True)
+    otp_code = fields.Str(required=True)
+    password = fields.Str(required=True)
 
 
 class UserFilterQueryParamsSchema(UserSchema):

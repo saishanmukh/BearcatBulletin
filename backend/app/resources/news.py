@@ -85,5 +85,4 @@ def get_by_id(id):
 def get_all(filter_args):
     """Retrieve all news"""
     news = News.find_all_news()
-    print(filter_args)
     return news
