@@ -98,7 +98,9 @@ export class NavbarComponent implements OnInit {
                 console.log(key+" "+value)
             });
             this.http.post<any>("http://127.0.0.1:5000/api/news", this.imageData).subscribe({
-                next: (response) => console.log(response),
+                next: (response) => {console.log(response)
+                this.imageData = new FormData();
+            },
                 error: (error) => console.log(error),
             })
             this.displayPostModal = "none";
